@@ -1,5 +1,5 @@
-import logger.Logger
+import logger.ILogger
 
 interface LoggerFactory {
-    fun getLogger(name: String) : Logger
+    fun getLogger(name: String) : ILogger
 }

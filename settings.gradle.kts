@@ -1,3 +1,3 @@
 
-rootProject.name = "klog"
+rootProject.name = "minilog"
 

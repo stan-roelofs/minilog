@@ -1,2 +1,2 @@
-# klog
-A kotlin logging library
+# minilog
+A tiny logging library written in Kotlin

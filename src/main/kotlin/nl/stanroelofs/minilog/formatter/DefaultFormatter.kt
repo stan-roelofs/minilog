@@ -1,6 +1,6 @@
-package formatter
+package nl.stanroelofs.minilog.formatter
 
-import logger.Level
+import nl.stanroelofs.minilog.logger.Level
 import java.time.LocalTime
 
 class DefaultFormatter : Formatter {

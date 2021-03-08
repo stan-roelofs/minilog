@@ -1,4 +1,4 @@
-package logger
+package nl.stanroelofs.minilog.logger
 
 interface ILogger {
     fun debug(message: String)

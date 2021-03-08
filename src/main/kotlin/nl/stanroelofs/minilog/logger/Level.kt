@@ -1,4 +1,4 @@
-package logger
+package nl.stanroelofs.minilog.logger
 
 enum class Level(private val stringValue: String) {
     DEBUG("DEBUG"),

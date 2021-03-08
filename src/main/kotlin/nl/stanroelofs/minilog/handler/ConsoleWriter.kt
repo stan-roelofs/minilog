@@ -1,8 +1,8 @@
-package handler
+package nl.stanroelofs.minilog.handler
 
-import logger.Level
+import nl.stanroelofs.minilog.logger.Level
 
-class ConsoleHandler : Handler {
+class ConsoleWriter : Writer {
     override fun writeLog(tag: String, level: Level, formattedMessage: String) {
         println(formattedMessage)
     }

@@ -1,9 +1,9 @@
-package logger
+package nl.stanroelofs.minilog.logger
 
-import formatter.Formatter
-import handler.Handler
+import nl.stanroelofs.minilog.formatter.Formatter
+import nl.stanroelofs.minilog.handler.Writer
 
-class Logger(private val tag: String, private val formatter : Formatter, private val handler : Handler) : ILogger {
+class Logger(private val tag: String, private val formatter : Formatter, private val handler : Writer) : ILogger {
 
     private fun log(level: Level, message: String) {
         handler.writeLog(tag, level, formatter.format(tag, level, message))

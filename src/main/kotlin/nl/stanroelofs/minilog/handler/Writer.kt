@@ -1,10 +1,10 @@
-package handler
+package nl.stanroelofs.minilog.handler
 
-import logger.Level
+import nl.stanroelofs.minilog.logger.Level
 
 /**
  * Interface for an object that handles logging output.
  */
-interface Handler {
+interface Writer {
     fun writeLog(tag: String, level: Level, formattedMessage: String)
 }

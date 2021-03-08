@@ -9,8 +9,8 @@ plugins {
 }
 
 group = "nl.stanroelofs"
-version = "1.0.0-SNAPSHOT"
-extra["isReleaseVersion"] = !version.toString().endsWith("SNAPSHOT")
+version = "1.0.1-SNAPSHOT"
+val isReleaseVersion = !version.toString().endsWith("SNAPSHOT")
 
 repositories {
     mavenCentral()
@@ -51,7 +51,7 @@ publishing {
         maven {
             val releaseRepo = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
             val snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-            setUrl(if (extra["isReleaseVersion"] as Boolean) releaseRepo else snapshotRepo)
+            setUrl(if (isReleaseVersion) releaseRepo else snapshotRepo)
 
             val nexusUsername: String by project
             val nexusPassword: String by project
@@ -63,7 +63,7 @@ publishing {
     }
 
     publications {
-        create<MavenPublication>("minilog") {
+        create<MavenPublication>("mavenJava") {
             pom {
                 name.set("minilog")
                 description.set("A minimalistic logging library")
@@ -77,9 +77,9 @@ publishing {
                     }
                 }
                 scm {
-                    connection.set("scm:git:git@github.com/stan-roelofs/Kotlin-Gameboy-Emulator.git")
-                    developerConnection.set("scm:git:git@github.com/stan-roelofs/Kotlin-Gameboy-Emulator.git")
-                    url.set("https://github.com/stan-roelofs/Kotlin-Gameboy-Emulator/")
+                    connection.set("scm:git:git@github.com/stan-roelofs/minilog.git")
+                    developerConnection.set("scm:git:git@github.com/stan-roelofs/minilog.git")
+                    url.set("https://github.com/stan-roelofs/minilog/")
                 }
                 developers {
                     developer {
@@ -93,13 +93,13 @@ publishing {
     }
 }
 
+tasks.withType<Sign>().configureEach {
+    onlyIf {
+        isReleaseVersion
+    }
+}
+
 // Signing artifacts
 signing {
     sign(publishing.publications["mavenJava"])
-}
-
-tasks.withType<Sign>().configureEach {
-    onlyIf {
-        extra["isReleaseVersion"] as Boolean
-    }
 }

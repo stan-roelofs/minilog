@@ -8,10 +8,10 @@ import nl.stanroelofs.minilog.logger.ILogger
 import nl.stanroelofs.minilog.logger.Logger
 
 object Logging : LoggerFactory {
-    private val handler : Writer = ConsoleWriter()
-    private val formatter : Formatter = DefaultFormatter()
+    override var defaultWriter : Writer = ConsoleWriter()
+    override var defaultFormatter : Formatter = DefaultFormatter()
 
     override fun getLogger(name: String) : ILogger {
-        return Logger(name, formatter, handler)
+        return Logger(name, defaultFormatter, defaultWriter)
     }
 }

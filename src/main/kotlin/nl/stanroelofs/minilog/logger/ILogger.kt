@@ -19,7 +19,7 @@ interface ILogger {
      * @return whether this logger is enabled for the given level
      * @see Level
      */
-    fun levelEnabled(level: Level) : Boolean = currentLevel.ordinal >= level.ordinal
+    fun levelEnabled(level: Level) : Boolean = currentLevel >= level
 
     val debugEnabled
         /** Returns whether debug messages are enabled for this logger */

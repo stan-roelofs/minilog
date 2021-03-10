@@ -11,7 +11,7 @@ interface ILogger {
     /** The current logging level for this logger
      * @see Level
      */
-    var currentLevel: Level
+    var level: Level
     /**
      * Returns whether logging with [level] is enabled
      *
@@ -19,7 +19,7 @@ interface ILogger {
      * @return whether this logger is enabled for the given level
      * @see Level
      */
-    fun levelEnabled(level: Level) : Boolean = currentLevel >= level
+    fun levelEnabled(level: Level) : Boolean = level >= this.level
 
     val debugEnabled
         /** Returns whether debug messages are enabled for this logger */

@@ -5,7 +5,7 @@ import nl.stanroelofs.minilog.handler.Writer
 
 class Logger(private val tag: String, private val formatter : Formatter, private val handler : Writer) : ILogger {
 
-    override var currentLevel = Level.OFF
+    override var level = Level.OFF
 
     private fun log(level: Level, message: String) {
         handler.writeLog(tag, level, formatter.format(tag, level, message))

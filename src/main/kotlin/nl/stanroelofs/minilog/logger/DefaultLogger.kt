@@ -13,5 +13,5 @@ import nl.stanroelofs.minilog.writer.Writer
  * @version 1.0
  */
 internal class DefaultLogger(override val name: String, override val writer: Writer, override val formatter: Formatter) : Logger {
-    override var level: Level = Level.OFF
+    override var level: Level = Level.DEBUG
 }

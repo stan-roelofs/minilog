@@ -34,7 +34,7 @@ class DefaultLoggerTest {
 
     @Test
     fun defaultLevel() {
-        assertEquals(Level.OFF, logger.level)
+        assertEquals(Level.DEBUG, logger.level)
     }
 
     @Test

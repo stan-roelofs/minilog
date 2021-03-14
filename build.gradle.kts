@@ -11,6 +11,7 @@ plugins {
 group = "nl.stanroelofs"
 version = "1.0.1-SNAPSHOT"
 val isReleaseVersion = !version.toString().endsWith("SNAPSHOT")
+val javadocDestination = file("docs")
 
 repositories {
     mavenCentral()
@@ -25,9 +26,14 @@ tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+tasks.javadoc {
+    dependsOn("dokkaJavadoc")
+    setDestinationDir(javadocDestination)
+}
+
 // Set dokka output directory
 tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().configureEach {
-    outputDirectory.set(file("$buildDir/docs"))
+    outputDirectory.set(javadocDestination)
     doFirst {
         file(outputDirectory).deleteRecursively()
     }

@@ -1,6 +1,6 @@
-import nl.stanroelofs.minilog.DefaultLoggerFactory
 import nl.stanroelofs.minilog.formatter.Formatter
 import nl.stanroelofs.minilog.logger.Level
+import nl.stanroelofs.minilog.loggerfactory.DefaultLoggerFactory
 import nl.stanroelofs.minilog.writer.Writer
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue

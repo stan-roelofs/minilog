@@ -1,4 +1,4 @@
-package nl.stanroelofs.minilog
+package nl.stanroelofs.minilog.loggerfactory
 
 import nl.stanroelofs.minilog.formatter.DefaultFormatter
 import nl.stanroelofs.minilog.formatter.Formatter

@@ -59,11 +59,11 @@ publishing {
             val snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             setUrl(if (isReleaseVersion) releaseRepo else snapshotRepo)
 
-            val nexusUsername: String by project
-            val nexusPassword: String by project
+            val nexusUsername: String? by project
+            val nexusPassword: String? by project
             credentials {
-                username = nexusUsername
-                password = nexusPassword
+                username = nexusUsername ?: "nexusUsername not configured"
+                password = nexusPassword ?: "nexusPassword not configured"
             }
         }
     }

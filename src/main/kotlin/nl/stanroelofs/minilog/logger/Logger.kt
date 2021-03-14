@@ -4,27 +4,30 @@ import nl.stanroelofs.minilog.formatter.Formatter
 import nl.stanroelofs.minilog.writer.Writer
 
 /**
- * A logger object which
- *
- * @param name a name for this logger
- * @param writer an object implementing the [Writer] interface which will be used to write log messages to an output
- * @param formatter an object implementing the [Formatter] interface which will be used to format log messages
+ * A logger interface
  *
  * @author Stan Roelofs
  * @version 1.0
  */
-class Logger(val name: String, private val writer: Writer, private val formatter: Formatter) {
+interface Logger {
 
-    /** The current logging level for this logger
-     * @see Level
-     */
-    var level: Level = Level.OFF
+    /** A name for this logger */
+    val name: String
+
+    /** The current logging level for this logger. */
+    var level: Level
+
+    /** A [Writer] which will write the log messages of this logger to some output */
+    val writer: Writer
+
+    /** A [Formatter] which will format the log messages of this logger */
+    val formatter: Formatter
 
     /**
-     * Returns whether logging with [level] is enabled
+     * Returns whether logging with [level] is enabled.
      *
      * @param level the logging level
-     * @return whether this logger is enabled for the given level
+     * @return true when the current level is greater than or equal to [level]
      * @see Level
      */
     fun levelEnabled(level: Level) : Boolean = level >= this.level

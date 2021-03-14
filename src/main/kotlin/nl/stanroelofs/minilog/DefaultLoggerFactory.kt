@@ -2,6 +2,7 @@ package nl.stanroelofs.minilog
 
 import nl.stanroelofs.minilog.formatter.DefaultFormatter
 import nl.stanroelofs.minilog.formatter.Formatter
+import nl.stanroelofs.minilog.logger.DefaultLogger
 import nl.stanroelofs.minilog.logger.Logger
 import nl.stanroelofs.minilog.writer.ConsoleWriter
 import nl.stanroelofs.minilog.writer.Writer
@@ -19,7 +20,7 @@ internal open class DefaultLoggerFactory : LoggerFactory {
         get() = HashMap(loggerMap)
 
     override fun getLogger(name: String) : Logger {
-        val logger = loggerMap[name] ?: Logger(name, defaultWriter, defaultFormatter)
+        val logger = loggerMap[name] ?: DefaultLogger(name, defaultWriter, defaultFormatter)
         loggerMap.putIfAbsent(name, logger)
         return logger
     }

@@ -1,0 +1,8 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+
+nl.stanroelofs.minilog
+nl.stanroelofs.minilog.formatter
+nl.stanroelofs.minilog.logger
+nl.stanroelofs.minilog.writer
+

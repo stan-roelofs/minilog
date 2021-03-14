@@ -4,5 +4,6 @@ $dokka.linkExtension:html
 nl.stanroelofs.minilog
 nl.stanroelofs.minilog.formatter
 nl.stanroelofs.minilog.logger
+nl.stanroelofs.minilog.loggerfactory
 nl.stanroelofs.minilog.writer
 

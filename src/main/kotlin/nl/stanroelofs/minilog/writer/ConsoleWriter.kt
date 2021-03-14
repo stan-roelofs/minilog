@@ -4,5 +4,4 @@ class ConsoleWriter : Writer {
     override fun writeLog(formattedMessage: String) {
         println(formattedMessage)
     }
-
 }

@@ -1,6 +1,7 @@
 package nl.stanroelofs.minilog.loggerfactory
 
 import nl.stanroelofs.minilog.formatter.Formatter
+import nl.stanroelofs.minilog.logger.Level
 import nl.stanroelofs.minilog.logger.Logger
 import nl.stanroelofs.minilog.writer.Writer
 
@@ -16,6 +17,9 @@ interface LoggerFactory {
 
     /** A [Formatter] which will be used as the formatter for new loggers created using this factory */
     var defaultFormatter: Formatter
+
+    /** The default [Level] of all loggers created by this factory */
+    var defaultLevel: Level
 
     /** Returns a logger with the specified name
      *

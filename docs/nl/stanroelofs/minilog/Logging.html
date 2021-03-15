@@ -159,6 +159,12 @@ public class <span class="typeNameLabel"><a href=Logging.html>Logging</a></span>
                                         </tr>
                                         
                                         <tr class="altColor">
+                                            <td class="colFirst"><code>private  <a href=../nl/stanroelofs/minilog/logger/Level.html>Level</a></code></td>
+                                            <th class="colSecond" scope="row"><code><a href=Logging.html#defaultLevel>defaultLevel</a></code></th>
+                                            <td class="colLast"></td>
+                                        </tr>
+                                        
+                                        <tr class="rowColor">
                                             <td class="colFirst"><code>public final static <a href=Logging.html>Logging</a></code></td>
                                             <th class="colSecond" scope="row"><code><a href=Logging.html#INSTANCE>INSTANCE</a></code></th>
                                             <td class="colLast"></td>
@@ -212,6 +218,14 @@ public class <span class="typeNameLabel"><a href=Logging.html>Logging</a></span>
                                         </tr>
                                         
                                         <tr id="i2" class="altColor">
+                                            <td class="colFirst"><code><a href=../nl/stanroelofs/minilog/logger/Level.html>Level</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=Logging.html#getDefaultLevel()>getDefaultLevel</a>() </code>
+                                            </th>
+                                            <td class="colLast">The default Level of all loggers created by this factory</td>
+                                        </tr>
+                                        
+                                        <tr id="i3" class="rowColor">
                                             <td class="colFirst"><code><a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a></code>
                                             </td>
                                             <th class="colSecond" scope="row"><code><a href=Logging.html#setDefaultWriter(Writer)>setDefaultWriter</a>(<a href=../nl/stanroelofs/minilog/writer/Writer.html>Writer</a> defaultWriter) </code>
@@ -219,12 +233,20 @@ public class <span class="typeNameLabel"><a href=Logging.html>Logging</a></span>
                                             <td class="colLast">A Writer which will be used as the writer for new loggers created using this factory</td>
                                         </tr>
                                         
-                                        <tr id="i3" class="rowColor">
+                                        <tr id="i4" class="altColor">
                                             <td class="colFirst"><code><a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a></code>
                                             </td>
                                             <th class="colSecond" scope="row"><code><a href=Logging.html#setDefaultFormatter(Formatter)>setDefaultFormatter</a>(<a href=../nl/stanroelofs/minilog/formatter/Formatter.html>Formatter</a> defaultFormatter) </code>
                                             </th>
                                             <td class="colLast">A Formatter which will be used as the formatter for new loggers created using this factory</td>
+                                        </tr>
+                                        
+                                        <tr id="i5" class="rowColor">
+                                            <td class="colFirst"><code><a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a></code>
+                                            </td>
+                                            <th class="colSecond" scope="row"><code><a href=Logging.html#setDefaultLevel(Level)>setDefaultLevel</a>(<a href=../nl/stanroelofs/minilog/logger/Level.html>Level</a> defaultLevel) </code>
+                                            </th>
+                                            <td class="colLast">The default Level of all loggers created by this factory</td>
                                         </tr>
                                         
                                         </tbody>
@@ -302,6 +324,21 @@ public class <span class="typeNameLabel"><a href=Logging.html>Logging</a></span>
                                     </li>
                                 </ul>
                                 
+                                <a id="getDefaultLevel()">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockList"
+                                          >
+                                    <li class="blockList">
+                                        <h4>getDefaultLevel</h4>
+                                        <pre class="methodSignature"> <a href=../nl/stanroelofs/minilog/logger/Level.html>Level</a> <a href=Logging.html#getDefaultLevel()>getDefaultLevel</a>()</pre>
+                                        <div class="block"><p>The default Level of all loggers created by this factory</p></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
                                 <a id="setDefaultWriter(Writer)">
                                     <!--   -->
                                 </a>
@@ -321,12 +358,27 @@ public class <span class="typeNameLabel"><a href=Logging.html>Logging</a></span>
                                     <!--   -->
                                 </a>
                                 <ul class=
-                                              "blockListLast"
+                                              "blockList"
                                           >
                                     <li class="blockList">
                                         <h4>setDefaultFormatter</h4>
                                         <pre class="methodSignature"> <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=Logging.html#setDefaultFormatter(Formatter)>setDefaultFormatter</a>(<a href=../nl/stanroelofs/minilog/formatter/Formatter.html>Formatter</a> defaultFormatter)</pre>
                                         <div class="block"><p>A Formatter which will be used as the formatter for new loggers created using this factory</p></div>
+                                        
+                                        <!-- TODO missing return annotation -->
+                                    </li>
+                                </ul>
+                                
+                                <a id="setDefaultLevel(Level)">
+                                    <!--   -->
+                                </a>
+                                <ul class=
+                                              "blockListLast"
+                                          >
+                                    <li class="blockList">
+                                        <h4>setDefaultLevel</h4>
+                                        <pre class="methodSignature"> <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=Logging.html#setDefaultLevel(Level)>setDefaultLevel</a>(<a href=../nl/stanroelofs/minilog/logger/Level.html>Level</a> defaultLevel)</pre>
+                                        <div class="block"><p>The default Level of all loggers created by this factory</p></div>
                                         
                                         <!-- TODO missing return annotation -->
                                     </li>

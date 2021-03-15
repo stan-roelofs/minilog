@@ -71,4 +71,16 @@ class DefaultLoggerFactoryTest {
 
         assertEquals(customFormatter, factory.getLogger("test2").formatter)
     }
+
+    @Test
+    fun defaultLevel() {
+        assertEquals(Level.DEBUG, factory.defaultLevel)
+    }
+
+    @Test
+    fun setLevel() {
+        factory.defaultLevel = Level.OFF
+        val logger = factory.getLogger("test")
+        assertEquals(Level.OFF, logger.level)
+    }
 }

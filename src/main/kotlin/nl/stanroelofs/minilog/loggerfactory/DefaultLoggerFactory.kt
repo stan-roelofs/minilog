@@ -22,12 +22,15 @@ internal open class DefaultLoggerFactory : LoggerFactory {
         get() = HashMap(loggerMap)
 
     override fun getLogger(name: String) : Logger {
-        if (loggerMap.containsKey(name)) {
-            return loggerMap[name]!!
+        var logger = loggerMap[name]
+
+        if (logger == null) {
+            logger = DefaultLogger(name, defaultWriter, defaultFormatter)
+            logger.level = defaultLevel
+            val existingLogger = loggerMap.putIfAbsent(name, logger)
+            return existingLogger ?: logger
         }
-        val logger = DefaultLogger(name, defaultWriter, defaultFormatter)
-        logger.level = defaultLevel
-        loggerMap.putIfAbsent(name, logger)
+
         return logger
     }
 }

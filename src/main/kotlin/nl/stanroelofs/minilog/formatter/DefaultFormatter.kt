@@ -1,10 +1,7 @@
 package nl.stanroelofs.minilog.formatter
 
-import nl.stanroelofs.minilog.logger.Level
-import java.time.LocalTime
-
 class DefaultFormatter : Formatter {
-    override fun format(name: String, level: Level, message: String): String {
-        return "${LocalTime.now()} [$name] ($level): $message"
+    override fun format(message: LogMessage): String {
+        return "${message.dateTime} [${message.thread}] - ${message.tag} (${message.level}): ${message.message}"
     }
 }

@@ -1,27 +1,21 @@
 package nl.stanroelofs.minilog.logger
 
 import nl.stanroelofs.minilog.formatter.Formatter
+import nl.stanroelofs.minilog.formatter.LogMessage
 import nl.stanroelofs.minilog.writer.Writer
+import java.util.function.Supplier
 
-/**
- * A logger interface
+/** A logger with a name/tag that writes logs using a [Writer] and [Formatter].
+ *
+ * @param name the name for this logger
+ * @param level the logging level, this will determine whether logs are actually written
+ * @param writer an object implementing the [Writer] interface which will be used to write log messages to an output
+ * @param formatter an object implementing the [Formatter] interface which will be used to format log messages
  *
  * @author Stan Roelofs
  * @version 1.0
  */
-interface Logger {
-
-    /** A name for this logger */
-    val name: String
-
-    /** The current logging level for this logger. */
-    var level: Level
-
-    /** A [Writer] which will write the log messages of this logger to some output */
-    val writer: Writer
-
-    /** A [Formatter] which will format the log messages of this logger */
-    val formatter: Formatter
+class Logger constructor(var name: String, var level: Level, val writer: Writer, val formatter: Formatter) {
 
     /**
      * Returns whether logging with [level] is enabled.
@@ -50,10 +44,13 @@ interface Logger {
 
 
     fun log(level: Level, message: String) {
-        writer.writeLog(formatter.format(name, level, message))
+        if (levelEnabled(level))
+            writer.writeLog(formatter.format(LogMessage(name, level, message)))
     }
 
-    /** Writes a debug message to some output
+    fun log(level: Level, message: Supplier<String>) = log(level, message.get())
+
+    /** Logs a message at the debug level.
      *
      * @param message the log message
      */
@@ -65,7 +62,20 @@ interface Logger {
     /** Alias for [debug] */
     fun d(message: String) = debug(message)
 
-    /** Writes an info message to some output
+    /** Logs a message at the debug level. The message will only be evaluated if debug messages
+     * are enabled by [level].
+     *
+     * @param message a lambda function that produces the message
+     */
+    fun debug(message: () -> String) {
+        if (debugEnabled)
+            log(Level.DEBUG, Supplier<String>(message))
+    }
+
+    /** alias for [debug] */
+    fun d(message: () -> String) = debug(message)
+
+    /** Logs a message at the info level.
      *
      * @param message the log message
      */
@@ -77,7 +87,20 @@ interface Logger {
     /** Alias for [info] */
     fun i(message: String) = info(message)
 
-    /** Writes a warning message to some output
+    /** Logs a message at the info level. The message will only be evaluated if info messages
+     * are enabled by [level].
+     *
+     * @param message a lambda function that produces the message
+     */
+    fun info(message: () -> String) {
+        if (infoEnabled)
+            log(Level.INFO, Supplier<String>(message))
+    }
+
+    /** alias for [info] */
+    fun i(message: () -> String) = info(message)
+
+    /** Logs a message at the warning level.
      *
      * @param message the log message
      */
@@ -89,7 +112,20 @@ interface Logger {
     /** Alias for [warning] */
     fun w(message: String) = warning(message)
 
-    /** Writes an error message to some output
+    /** Logs a message at the warning level. The message will only be evaluated if warning messages
+     * are enabled by [level].
+     *
+     * @param message a lambda function that produces the message
+     */
+    fun warning(message: () -> String) {
+        if (warningEnabled)
+            log(Level.WARNING, Supplier<String>(message))
+    }
+
+    /** alias for [warning] */
+    fun w(message: () -> String) = warning(message)
+
+    /** Logs a message at the error level.
      *
      * @param message the log message
      * @see i
@@ -101,4 +137,17 @@ interface Logger {
 
     /** Alias for [error] */
     fun e(message: String) = error(message)
+
+    /** Logs a message at the error level. The message will only be evaluated if error messages
+     * are enabled by [level].
+     *
+     * @param message a lambda function that produces the message
+     */
+    fun error(message: () -> String) {
+        if (errorEnabled)
+            log(Level.ERROR, Supplier<String>(message))
+    }
+
+    /** alias for [error] */
+    fun e(message: () -> String) = error(message)
 }

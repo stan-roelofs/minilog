@@ -1,5 +1,5 @@
 import nl.stanroelofs.minilog.formatter.Formatter
-import nl.stanroelofs.minilog.logger.DefaultLogger
+import nl.stanroelofs.minilog.formatter.LogMessage
 import nl.stanroelofs.minilog.logger.Level
 import nl.stanroelofs.minilog.logger.Logger
 import nl.stanroelofs.minilog.writer.Writer
@@ -8,33 +8,99 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 
-class DefaultLoggerTest {
+class LoggerTest {
 
     private var messages = ArrayList<String>()
 
     private val writer = object : Writer {
+        override fun open() {
+        }
+
         override fun writeLog(formattedMessage: String) {
             messages.add(formattedMessage)
+        }
+
+        override fun close() {
         }
     }
 
     private val formatter = object : Formatter {
-        override fun format(name: String, level: Level, message: String): String {
-            return message
+        override fun format(message: LogMessage): String {
+            return message.message
         }
     }
 
-    private var logger : Logger = DefaultLogger("test", writer, formatter)
+    private lateinit var logger : Logger
 
     @Before
     fun createLogger() {
-        logger = DefaultLogger("test", writer, formatter)
+        logger = Logger("test", Level.OFF, writer, formatter)
         messages.clear()
     }
 
     @Test
     fun defaultLevel() {
-        assertEquals(Level.DEBUG, logger.level)
+        assertEquals(Level.OFF, logger.level)
+    }
+
+    @Test
+    fun debug() {
+        logger.level = Level.DEBUG
+        logger.d("1")
+        logger.debug("2")
+        logger.d{"3"}
+        logger.debug{"4"}
+
+        assertEquals(4, messages.size)
+        assertEquals("1", messages[0])
+        assertEquals("2", messages[1])
+        assertEquals("3", messages[2])
+        assertEquals("4", messages[3])
+    }
+
+    @Test
+    fun info() {
+        logger.level = Level.INFO
+        logger.i("1")
+        logger.info("2")
+        logger.i{"3"}
+        logger.info{"4"}
+
+        assertEquals(4, messages.size)
+        assertEquals("1", messages[0])
+        assertEquals("2", messages[1])
+        assertEquals("3", messages[2])
+        assertEquals("4", messages[3])
+    }
+
+    @Test
+    fun warning() {
+        logger.level = Level.WARNING
+        logger.w("1")
+        logger.warning("2")
+        logger.w{"3"}
+        logger.warning{"4"}
+
+        assertEquals(4, messages.size)
+        assertEquals("1", messages[0])
+        assertEquals("2", messages[1])
+        assertEquals("3", messages[2])
+        assertEquals("4", messages[3])
+    }
+
+    @Test
+    fun error() {
+        logger.level = Level.ERROR
+        logger.e("1")
+        logger.error("2")
+        logger.e{"3"}
+        logger.error{"4"}
+
+        assertEquals(4, messages.size)
+        assertEquals("1", messages[0])
+        assertEquals("2", messages[1])
+        assertEquals("3", messages[2])
+        assertEquals("4", messages[3])
     }
 
     @Test

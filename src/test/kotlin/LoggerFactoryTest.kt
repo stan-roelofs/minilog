@@ -1,6 +1,7 @@
 import nl.stanroelofs.minilog.formatter.Formatter
+import nl.stanroelofs.minilog.formatter.LogMessage
 import nl.stanroelofs.minilog.logger.Level
-import nl.stanroelofs.minilog.loggerfactory.DefaultLoggerFactory
+import nl.stanroelofs.minilog.loggerfactory.LoggerFactory
 import nl.stanroelofs.minilog.writer.Writer
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -8,13 +9,13 @@ import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertNotEquals
 
-class DefaultLoggerFactoryTest {
+class LoggerFactoryTest {
 
-    private var factory = DefaultLoggerFactory()
+    private var factory = LoggerFactory()
 
     @Before
     fun resetFactory() {
-        factory = DefaultLoggerFactory()
+        factory = LoggerFactory()
     }
 
     @Test
@@ -32,8 +33,8 @@ class DefaultLoggerFactoryTest {
     @Test
     fun addLogger() {
         val logger = factory.getLogger("test")
-        assertTrue(factory.loggers.containsKey("test"))
-        assertEquals(logger, factory.loggers["test"])
+        assertTrue(factory.loggers.contains(logger))
+        assertEquals(logger, factory.loggers.find { it == logger})
     }
 
     @Test
@@ -60,8 +61,8 @@ class DefaultLoggerFactoryTest {
     @Test
     fun setFormatter() {
         val customFormatter = object : Formatter {
-            override fun format(name: String, level: Level, message: String): String {
-                return ""
+            override fun format(message: LogMessage): String {
+                return message.message
             }
         }
 

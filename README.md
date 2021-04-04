@@ -1,6 +1,8 @@
 # minilog
+<!--
 [![Build Status](https://travis-ci.com/stan-roelofs/minilog.svg?branch=master)](https://travis-ci.org/stan-roelofs/minilog)
  ![Maven Central](https://img.shields.io/maven-central/v/nl.stanroelofs/minilog)
+-->
 
 A small logging library I wrote for my personal projects. Can be used with Java, Kotlin, and any other JVM language.
 

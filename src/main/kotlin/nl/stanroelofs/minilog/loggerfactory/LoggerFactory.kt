@@ -9,7 +9,7 @@ import nl.stanroelofs.minilog.writer.Writer
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
 
-internal open class LoggerFactory : ILoggerFactory {
+open class LoggerFactory : ILoggerFactory {
     override var defaultWriter : Writer = ConsoleWriter()
     override var defaultFormatter : Formatter = DefaultFormatter()
     override var defaultLevel = Level.DEBUG

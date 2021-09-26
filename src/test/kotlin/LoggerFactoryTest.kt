@@ -20,7 +20,7 @@ class LoggerFactoryTest {
 
     @Test
     fun getLoggerCorrectName() {
-        val logger = factory.getLogger("test")
+        val logger = factory.get("test")
         assertEquals("test", logger.name)
     }
 
@@ -32,15 +32,15 @@ class LoggerFactoryTest {
 
     @Test
     fun addLogger() {
-        val logger = factory.getLogger("test")
+        val logger = factory.get("test")
         assertTrue(factory.loggers.contains(logger))
         assertEquals(logger, factory.loggers.find { it == logger})
     }
 
     @Test
     fun getExistingLogger() {
-        val logger = factory.getLogger("test")
-        val logger2 = factory.getLogger("test")
+        val logger = factory.get("test")
+        val logger2 = factory.get("test")
         assertEquals(logger, logger2)
     }
 
@@ -51,11 +51,11 @@ class LoggerFactoryTest {
             }
         }
 
-        val logger = factory.getLogger("test")
+        val logger = factory.get("test")
         factory.defaultWriter = customWriter
         assertNotEquals(logger.writer, customWriter)
 
-        assertEquals(customWriter, factory.getLogger("test2").writer)
+        assertEquals(customWriter, factory.get("test2").writer)
     }
 
     @Test
@@ -66,11 +66,11 @@ class LoggerFactoryTest {
             }
         }
 
-        val logger = factory.getLogger("test")
+        val logger = factory.get("test")
         factory.defaultFormatter = customFormatter
         assertNotEquals(logger.formatter, customFormatter)
 
-        assertEquals(customFormatter, factory.getLogger("test2").formatter)
+        assertEquals(customFormatter, factory.get("test2").formatter)
     }
 
     @Test
@@ -81,7 +81,7 @@ class LoggerFactoryTest {
     @Test
     fun setLevel() {
         factory.defaultLevel = Level.OFF
-        val logger = factory.getLogger("test")
+        val logger = factory.get("test")
         assertEquals(Level.OFF, logger.level)
     }
 }

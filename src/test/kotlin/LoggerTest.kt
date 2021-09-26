@@ -13,14 +13,8 @@ class LoggerTest {
     private var messages = ArrayList<String>()
 
     private val writer = object : Writer {
-        override fun open() {
-        }
-
         override fun writeLog(formattedMessage: String) {
             messages.add(formattedMessage)
-        }
-
-        override fun close() {
         }
     }
 

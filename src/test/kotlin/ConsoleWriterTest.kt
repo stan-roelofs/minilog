@@ -48,7 +48,7 @@ class ConsoleWriterTest {
 
     @Test
     fun testOutput() {
-        Logging.getLogger("test").d("test message")
+        Logging.get("test").d("test message")
         val str = String(messages.toByteArray(), StandardCharsets.UTF_8)
         assertTrue(str.contains("test message"))
     }

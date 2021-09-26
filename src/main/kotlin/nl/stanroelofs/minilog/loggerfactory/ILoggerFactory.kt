@@ -28,5 +28,5 @@ interface ILoggerFactory {
      *
      *  @param name the name of the logger
      */
-    fun getLogger(name: String) : Logger
+    fun get(name: String) : Logger
 }

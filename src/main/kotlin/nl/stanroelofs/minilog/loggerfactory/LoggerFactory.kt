@@ -20,7 +20,7 @@ open class LoggerFactory : ILoggerFactory {
     override val loggers: Collection<Logger>
         get() = loggerMap.values
 
-    override fun getLogger(name: String) : Logger {
+    override fun get(name: String) : Logger {
         var logger = loggerMap[name]
 
         if (logger == null) {

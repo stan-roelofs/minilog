@@ -1,6 +1,6 @@
 import nl.stanroelofs.minilog.Logging
+import nl.stanroelofs.minilog.logger.ConsoleWriter
 import nl.stanroelofs.minilog.logger.Level
-import nl.stanroelofs.minilog.writer.ConsoleWriter
 import org.junit.AfterClass
 import org.junit.Before
 import org.junit.BeforeClass

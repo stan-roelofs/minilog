@@ -1,10 +1,5 @@
 package nl.stanroelofs.minilog.logger
 
-import nl.stanroelofs.minilog.formatter.Formatter
-import nl.stanroelofs.minilog.formatter.LogMessage
-import nl.stanroelofs.minilog.writer.Writer
-import java.util.function.Supplier
-
 /** A logger with a name/tag that writes logs using a [Writer] and [Formatter].
  *
  * @param name the name for this logger
@@ -13,9 +8,8 @@ import java.util.function.Supplier
  * @param formatter an object implementing the [Formatter] interface which will be used to format log messages
  *
  * @author Stan Roelofs
- * @version 1.0
  */
-class Logger constructor(var name: String, var level: Level, val writer: Writer, val formatter: Formatter) {
+class Logger constructor(var name: String, var level: Level, var writer: Writer, var formatter: Formatter) {
 
     /**
      * Returns whether logging with [level] is enabled.
@@ -43,12 +37,13 @@ class Logger constructor(var name: String, var level: Level, val writer: Writer,
         get() = levelEnabled(Level.ERROR)
 
 
-    fun log(level: Level, message: String) {
-        if (levelEnabled(level))
-            writer.writeLog(formatter.format(LogMessage(name, level, message)))
+    private fun log(level: Level, message: String) {
+        writer.writeLog(formatter.format(LogMessage(name, level, message)))
     }
 
-    fun log(level: Level, message: Supplier<String>) = log(level, message.get())
+    private fun log(level: Level, message: () -> String) {
+        log(level, message())
+    }
 
     /** Logs a message at the debug level.
      *
@@ -69,7 +64,7 @@ class Logger constructor(var name: String, var level: Level, val writer: Writer,
      */
     fun debug(message: () -> String) {
         if (debugEnabled)
-            log(Level.DEBUG, Supplier<String>(message))
+            log(Level.DEBUG, message)
     }
 
     /** alias for [debug] */
@@ -94,7 +89,7 @@ class Logger constructor(var name: String, var level: Level, val writer: Writer,
      */
     fun info(message: () -> String) {
         if (infoEnabled)
-            log(Level.INFO, Supplier<String>(message))
+            log(Level.INFO, message)
     }
 
     /** alias for [info] */
@@ -119,7 +114,7 @@ class Logger constructor(var name: String, var level: Level, val writer: Writer,
      */
     fun warning(message: () -> String) {
         if (warningEnabled)
-            log(Level.WARNING, Supplier<String>(message))
+            log(Level.WARNING, (message))
     }
 
     /** alias for [warning] */
@@ -145,7 +140,7 @@ class Logger constructor(var name: String, var level: Level, val writer: Writer,
      */
     fun error(message: () -> String) {
         if (errorEnabled)
-            log(Level.ERROR, Supplier<String>(message))
+            log(Level.ERROR, message)
     }
 
     /** alias for [error] */

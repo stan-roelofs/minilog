@@ -1,8 +1,4 @@
-import nl.stanroelofs.minilog.formatter.Formatter
-import nl.stanroelofs.minilog.formatter.LogMessage
-import nl.stanroelofs.minilog.logger.Level
-import nl.stanroelofs.minilog.logger.Logger
-import nl.stanroelofs.minilog.writer.Writer
+import nl.stanroelofs.minilog.logger.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before

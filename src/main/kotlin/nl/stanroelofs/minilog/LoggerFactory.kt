@@ -1,14 +1,12 @@
-package nl.stanroelofs.minilog.loggerfactory
+package nl.stanroelofs.minilog
 
-import nl.stanroelofs.minilog.formatter.DefaultFormatter
-import nl.stanroelofs.minilog.formatter.Formatter
-import nl.stanroelofs.minilog.logger.Level
-import nl.stanroelofs.minilog.logger.Logger
-import nl.stanroelofs.minilog.writer.ConsoleWriter
-import nl.stanroelofs.minilog.writer.Writer
+import nl.stanroelofs.minilog.logger.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
 
+/**
+ * @author Stan Roelofs
+ */
 open class LoggerFactory : ILoggerFactory {
     override var defaultWriter : Writer = ConsoleWriter()
     override var defaultFormatter : Formatter = DefaultFormatter()

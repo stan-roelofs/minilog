@@ -32,7 +32,7 @@ Note that this will only affect new `Logger` objects, so make sure you set up yo
 **before** creating loggers using `Logging.get`.
 ### Configuring outputs
 `Writer` objects write log messages to some output. Outputs can be configured by modifying `Logging.writers`.
-####Example
+#### Example
 ```kotlin
 Logging.writers.add(SystemOutWriter())
 Logging.writers.add(FileWriter(File.createTempFile("example", "txt"), false))
@@ -41,7 +41,7 @@ Logging.writers.add(FileWriter(File.createTempFile("example", "txt"), false))
 ### Formatting
 The `Logging.formatter` object decides how log messages are formatted. Create your own implementation of 
 the `Formatter` interface to override the default behaviour.<br>
-####Example
+#### Example
 ```kotlin
 Logging.formatter = object : Formatter
 {

@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "nl.stanroelofs"
-version = "1.0.1-SNAPSHOT"
+version = "1.0.2-SNAPSHOT"
 val isReleaseVersion = !version.toString().endsWith("SNAPSHOT")
 val javadocDestination = file("docs")
 

@@ -11,16 +11,18 @@ import kotlin.test.assertTrue
 class FileWriterTest {
     @Test
     fun testOutput() {
-        val logger = Logging.get("test")
-        val message = "message"
         val file = File.createTempFile("test", "test")
         val writer = FileWriter(file, true)
-        logger.writer = writer
-        logger.formatter = object : Formatter {
+
+        Logging.writers.add(writer)
+        Logging.formatter = object : Formatter {
             override fun format(message: LogMessage): String {
                 return message.message
             }
         }
+        val logger = Logging.get("test")
+        val message = "message"
+
         logger.level = Level.DEBUG
         logger.d(message)
         writer.flush()

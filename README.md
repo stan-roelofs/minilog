@@ -4,7 +4,12 @@
  ![Maven Central](https://img.shields.io/maven-central/v/nl.stanroelofs/minilog)
 -->
 
-A small logging library I wrote for my personal projects. Can be used with Java, Kotlin, and any other JVM language.
+A simple logging library.
+
+## Gradle
+```
+implementation 'nl.stanroelofs:minilog-1.0.2'
+```
 
 ## Example
 ```kotlin
@@ -20,10 +25,34 @@ class Example {
 }
 ```
 
-## Gradle
+
+## Configuration
+The `Logging` object can be modified in order to configure logging.
+Note that this will only affect new `Logger` objects, so make sure you set up your configuration
+**before** creating loggers using `Logging.get`.
+### Configuring outputs
+`Writer` objects write log messages to some output. Outputs can be configured by modifying `Logging.writers`.
+####Example
+```kotlin
+Logging.writers.add(SystemOutWriter())
+Logging.writers.add(FileWriter(File.createTempFile("example", "txt"), false))
 ```
-implementation 'nl.stanroelofs:minilog-1.0.1'
+
+### Formatting
+The `Logging.formatter` object decides how log messages are formatted. Create your own implementation of 
+the `Formatter` interface to override the default behaviour.<br>
+####Example
+```kotlin
+Logging.formatter = object : Formatter
+{
+    override fun format(message: LogMessage): String {
+        return "[${message.level.name}] ${message.message}"
+    }
+}
 ```
+
+## API
+https://stan-roelofs.github.io/minilog/
 
 ## Contributing
 Issues and pull requests are welcome. 

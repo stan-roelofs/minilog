@@ -1,3 +1,3 @@
 package nl.stanroelofs.minilog
 
-object Logging : ILoggerFactory by LoggerFactory()
+val Logging = LoggerFactory()

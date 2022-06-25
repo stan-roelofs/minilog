@@ -8,9 +8,18 @@ import java.util.concurrent.ConcurrentMap
  * @author Stan Roelofs
  */
 open class LoggerFactory : ILoggerFactory {
-    override var defaultWriter : Writer = ConsoleWriter()
-    override var defaultFormatter : Formatter = DefaultFormatter()
-    override var defaultLevel = Level.DEBUG
+    val writers : MutableCollection<Writer> = ArrayList()
+    var formatter : Formatter = DefaultFormatter()
+    var level = Level.DEBUG
+
+    private var combinedWriter = object : Writer {
+        override fun writeLog(formattedMessage: String) {
+            for (writer in writers)
+            {
+                writer.writeLog(formattedMessage)
+            }
+        }
+    }
 
     private val loggerMap : ConcurrentMap<String, Logger> = ConcurrentHashMap()
 
@@ -22,7 +31,7 @@ open class LoggerFactory : ILoggerFactory {
         var logger = loggerMap[name]
 
         if (logger == null) {
-            logger = Logger(name, defaultLevel, defaultWriter, defaultFormatter)
+            logger = Logger(name, level, combinedWriter, formatter)
             val existingLogger = loggerMap.putIfAbsent(name, logger)
             return existingLogger ?: logger
         }

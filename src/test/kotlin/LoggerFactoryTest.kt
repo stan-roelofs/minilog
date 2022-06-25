@@ -7,7 +7,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import kotlin.test.assertNotEquals
 
 class LoggerFactoryTest {
 
@@ -16,6 +15,7 @@ class LoggerFactoryTest {
     @Before
     fun resetFactory() {
         factory = LoggerFactory()
+        factory.level = Level.DEBUG
     }
 
     @Test
@@ -47,41 +47,69 @@ class LoggerFactoryTest {
     @Test
     fun setWriter() {
         val customWriter = object : Writer {
+            var gotMessage = false
             override fun writeLog(formattedMessage: String) {
+                gotMessage = true
             }
         }
-
-        val logger = factory.get("test")
-        factory.defaultWriter = customWriter
-        assertNotEquals(logger.writer, customWriter)
-
-        assertEquals(customWriter, factory.get("test2").writer)
+        factory.writers.add(customWriter)
+        factory.get("test").i("")
+        assertTrue(customWriter.gotMessage)
     }
 
     @Test
     fun setFormatter() {
         val customFormatter = object : Formatter {
+            var gotMessage = false
             override fun format(message: LogMessage): String {
+                gotMessage = true
                 return message.message
             }
         }
 
-        val logger = factory.get("test")
-        factory.defaultFormatter = customFormatter
-        assertNotEquals(logger.formatter, customFormatter)
-
-        assertEquals(customFormatter, factory.get("test2").formatter)
+        factory.formatter = customFormatter
+        factory.get("test").i("")
+        assertTrue(customFormatter.gotMessage)
     }
 
     @Test
     fun defaultLevel() {
-        assertEquals(Level.DEBUG, factory.defaultLevel)
+        assertEquals(Level.DEBUG, factory.level)
     }
 
     @Test
     fun setLevel() {
-        factory.defaultLevel = Level.OFF
+        factory.level = Level.OFF
         val logger = factory.get("test")
         assertEquals(Level.OFF, logger.level)
+    }
+
+    @Test
+    fun multipleWriters()
+    {
+        val formatter = object : Formatter
+        {
+            override fun format(message: LogMessage): String {
+                return message.message
+            }
+        }
+        class WriterMock : Writer
+        {
+            var lastMessage = ""
+            override fun writeLog(formattedMessage: String) {
+                lastMessage = formattedMessage
+            }
+        }
+        val writer = WriterMock()
+        val writer2 = WriterMock()
+
+        factory.formatter = formatter
+        factory.writers.add(writer)
+        factory.writers.add(writer2)
+
+        factory.get("test").i("test")
+
+        assertEquals("test", writer.lastMessage)
+        assertEquals("test", writer2.lastMessage)
     }
 }

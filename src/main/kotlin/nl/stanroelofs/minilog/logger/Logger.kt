@@ -9,7 +9,7 @@ package nl.stanroelofs.minilog.logger
  *
  * @author Stan Roelofs
  */
-class Logger constructor(var name: String, var level: Level, var writer: Writer, var formatter: Formatter) {
+class Logger constructor(var name: String, var level: Level, private var writer: Writer, private var formatter: Formatter) {
 
     /**
      * Returns whether logging with [level] is enabled.

@@ -51,8 +51,5 @@ Logging.formatter = object : Formatter
 }
 ```
 
-## API
-https://stan-roelofs.github.io/minilog/
-
 ## Contributing
 Issues and pull requests are welcome. 

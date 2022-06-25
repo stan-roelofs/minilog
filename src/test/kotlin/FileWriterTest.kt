@@ -6,15 +6,15 @@ import nl.stanroelofs.minilog.logger.LogMessage
 import org.junit.Test
 import java.io.File
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class FileWriterTest {
-
     @Test
     fun testOutput() {
         val logger = Logging.get("test")
         val message = "message"
         val file = File.createTempFile("test", "test")
-        val writer = FileWriter(file)
+        val writer = FileWriter(file, true)
         logger.writer = writer
         logger.formatter = object : Formatter {
             override fun format(message: LogMessage): String {
@@ -26,6 +26,32 @@ class FileWriterTest {
         writer.flush()
 
         val result = file.readText()
-        assertEquals(message, result)
+        assertEquals(message + System.lineSeparator(), result)
+    }
+
+    @Test
+    fun testNotClearFile() {
+        val file = File.createTempFile("test", "test")
+        file.writer().apply {
+            write("test")
+            flush()
+            close()
+        }
+        assertTrue(file.readText().isNotEmpty())
+        FileWriter(file, true).flush()
+        assertTrue(file.readText().isNotEmpty())
+    }
+
+    @Test
+    fun testClearFile() {
+        val file = File.createTempFile("test", "test")
+        file.writer().apply {
+            write("test")
+            flush()
+            close()
+        }
+        assertTrue(file.readText().isNotEmpty())
+        FileWriter(file, false).flush()
+        assertTrue(file.readText().isEmpty())
     }
 }

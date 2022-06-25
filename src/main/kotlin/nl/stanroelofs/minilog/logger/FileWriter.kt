@@ -1,13 +1,21 @@
 package nl.stanroelofs.minilog.logger
 
+import java.io.BufferedWriter
 import java.io.File
+import java.io.FileWriter
 import java.io.IOException
 
-class FileWriter(file: File) : Writer {
-    val fileWriter = file.bufferedWriter()
+/**
+ * Writes log messages to a file.
+ *
+ * @param file the file that log messages should be written to
+ * @param append if true, messages will be written to the end of the file rather than the beginning.
+ */
+class FileWriter(file: File, append: Boolean = false) : Writer {
+
+    private val fileWriter = BufferedWriter(FileWriter(file, append))
 
     init {
-        fileWriter.write("")
         Runtime.getRuntime().addShutdownHook(object : Thread() {
             override fun run() {
                 fileWriter.close()
@@ -18,6 +26,7 @@ class FileWriter(file: File) : Writer {
     override fun writeLog(formattedMessage: String) {
         try {
             fileWriter.append(formattedMessage)
+            fileWriter.newLine()
         } catch (_: IOException) {
         }
     }
